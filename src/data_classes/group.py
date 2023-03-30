@@ -18,13 +18,14 @@ class Group(DataClass):
             'participants_ids': literal_eval
         }
 
-    def from_dict(self, dictionary):
+    def from_dict(self, dictionary, count_of_recurs=5):
         self.name = dictionary['name']
         self.description = dictionary['description']
 
         self.participants = []
-        for i in dictionary['participants_ids']:
-            self.participants.append(Member().get_by_id(i))
+        if count_of_recurs > 0:
+            for i in dictionary['participants_ids']:
+                self.participants.append(Member().get_by_id(i, count_of_recurs - 1))
 
     def to_dict(self) -> dict:
         return {
