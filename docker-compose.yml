@@ -1,0 +1,8 @@
+services:
+  api:
+    image: .
+    volumes:
+      - data:/usr/src/app/data
+
+volumes:
+  data:
